@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Headline:</strong>
+  <%= @news.headline %>
+</p>
+
+<p>
+  <strong>Subhead:</strong>
+  <%= @news.subhead %>
+</p>
+
+<p>
+  <strong>Copy:</strong>
+  <%= @news.copy %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @news.date %>
+</p>
+
+<%= link_to 'Edit', edit_news_path(@news) %> |
+<%= link_to 'Back', news_index_path %>
