@@ -18,6 +18,12 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # Devise for users
 gem 'devise'
+# Bootstrap
+gem 'bootstrap-sass'
+# Boostrap form
+gem 'bootstrap_form'
+# Jquery
+gem 'jquery-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

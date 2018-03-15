@@ -1,0 +1,20 @@
+<% provide(:title, 'Edit profile') %>
+
+<h1>Edit profile</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= devise_error_messages! %>
+    <%= bootstrap_form_for(:user, :url => registration_path(:user), layout: :horizontal, html: { method: :put }) do |f| %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "fname" %>
+      <%= f.text_field :last_name, autofocus: true, autocomplete: "lname" %>
+      <%= f.email_field :email, autocomplete: "email" %>
+      <%= f.password_field :password, autocomplete: "off", placeholder: @minimum_password_length.to_s + " characters minimum" %>
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      <%= f.password_field :current_password, autocomplete: "off", placeholder: "we need your current password to confirm your changes" %>
+
+      <%= link_to "Cancel my account", registration_path(:user), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger col-xs-4" %>
+      <%= f.submit "Edit", class: "btn btn-primary col-xs-4 col-xs-offset-4" %>
+    <% end %>
+  </div>
+</div>

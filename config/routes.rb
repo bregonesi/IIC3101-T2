@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  #devise_for :users
-	devise_for :users, controllers: {
-      sessions: 'users/sessions'
-  }
-	root 'news#index'
+	
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }, skip: :passwords
+  devise_scope :user do
+  	get '/users', to: 'users#index'
+  	delete '/users/:id', to: 'users#destroy', as: :delete_user
+  end
 
   resources :news
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+	root 'news#index'
 end

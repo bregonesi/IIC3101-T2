@@ -1,0 +1,17 @@
+<% provide(:title, 'New user') %>
+
+<h1>New user</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= devise_error_messages! %>
+    <%= bootstrap_form_for(:user, :url => registration_path(:user), layout: :horizontal) do |f| %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "off" %>
+      <%= f.text_field :last_name, autofocus: true, autocomplete: "off" %>
+      <%= f.email_field :email, autocomplete: "off" %>
+      <%= f.password_field :password, autocomplete: "off", placeholder: @minimum_password_length.to_s + " characters minimum" %>
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      <%= f.submit "Create", class: "btn btn-primary btn-block" %>
+    <% end %>
+  </div>
+</div>
