@@ -1,5 +1,5 @@
 class UsersController < Users::RegistrationsController
-  before_action :user_signed_in?, only: [:index, :destroy]
+  before_action :authenticate_user!, only: [:index, :destroy]
 
   # GET /user
   def index

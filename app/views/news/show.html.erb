@@ -1,10 +1,13 @@
-<% provide(:title, truncate(@news.headline, :length => 30)) %>
+<% provide(:title, @news.short_headline(30)) %>
 
 <div class="row">
-	<%= link_to "Edit", edit_news_path(@news), class: "btn btn-primary col-xs-3" %></object>
-  <%= link_to "Delete", @news, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger col-xs-3 col-xs-offset-6" %></object>
-  <br>
-	<br>
+	<% if user_signed_in? %>
+		<%= link_to "Edit", edit_news_path(@news), class: "btn btn-primary col-xs-3" %></object>
+  	<%= link_to "Delete", @news, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger col-xs-3 col-xs-offset-6" %>
+  	<br>
+		<br>
+  <% end %>
+
 	<br>
 	<div class="col-xs-12">
 			<font size="5">

@@ -1,6 +1,6 @@
 <% provide(:title, 'News') %>
 
-<%= link_to 'New News', new_news_path, class: "btn btn-success", style: "float: right" %>
+<%= link_to 'New News', new_news_path, class: "btn btn-success", style: "float: right" if user_signed_in? %>
 
 <h1>News</h1>
 
@@ -18,12 +18,12 @@
                 </div>
               </div>
             <% end %>
-            <h4><%= truncate(news.headline, :length => 200) %></h4>
+            <h4><%= news.short_headline %></h4>
           </div>
           <div class="panel-body">
-            <%= simple_format(truncate(news.subhead, :length => 200)) %>
+            <%= simple_format(news.short_subhead) %>
             <hr>
-            <small><%= simple_format(truncate(news.copy, :length => 500)) %></small>
+            <small><%= simple_format(news.short_copy) %></small>
           </div>
           <div class="panel-footer container-fluid">
             <div class="text-left" style="display: inline-block;">

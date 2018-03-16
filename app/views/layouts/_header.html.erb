@@ -17,10 +17,12 @@
                   <%= f.submit "Log in", class: "btn btn-primary btn-block" %>
                 <% end %>
               <% else %>
-                <%= link_to "Add user", new_user_registration_path %>
-                <%= link_to "List users", users_path %>
+                <%= link_to "News list", users_path %>
                 <div role="separator" class="divider"></div>
-                <%= link_to "Edit profile", edit_user_registration_path %>
+                <%= link_to "Add user", new_user_registration_path %>
+                <%= link_to "Users list", users_path %>
+                <%= link_to "Edit my profile", edit_user_registration_path %>
+                <div role="separator" class="divider"></div>
                 <%= link_to "Logout", destroy_user_session_path, method: :delete %>
               <% end %>
             </li>
