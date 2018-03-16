@@ -1,37 +1,8 @@
-<%= form_with(model: news, local: true) do |form| %>
-  <% if news.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(news.errors.count, "error") %> prohibited this news from being saved:</h2>
+<%= bootstrap_form_for(news) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.text_field :headline, autofocus: true, autocomplete: "off" %>
+  <%= f.text_area :subhead, autocomplete: "off", rows: "3" %>
+  <%= f.text_area :copy, autocomplete: "off", rows: "8" %>
 
-      <ul>
-      <% news.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :headline %>
-    <%= form.text_field :headline, id: :news_headline %>
-  </div>
-
-  <div class="field">
-    <%= form.label :subhead %>
-    <%= form.text_field :subhead, id: :news_subhead %>
-  </div>
-
-  <div class="field">
-    <%= form.label :copy %>
-    <%= form.text_area :copy, id: :news_copy %>
-  </div>
-
-  <div class="field">
-    <%= form.label :date %>
-    <%= form.datetime_select :date, id: :news_date %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= f.submit class: "btn btn-success center-block" %>
 <% end %>

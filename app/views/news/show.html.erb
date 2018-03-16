@@ -1,24 +1,35 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, truncate(@news.headline, :length => 30)) %>
 
-<p>
-  <strong>Headline:</strong>
-  <%= @news.headline %>
-</p>
+<div class="row">
+	<%= link_to "Edit", edit_news_path(@news), class: "btn btn-primary col-xs-3" %></object>
+  <%= link_to "Delete", @news, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger col-xs-3 col-xs-offset-6" %></object>
+  <br>
+	<br>
+	<br>
+	<div class="col-xs-12">
+			<font size="5">
+				<%= @news.headline %>
+			</font>
+			<br>
+			<br>
+			<font size="3">
+				<%= simple_format(@news.subhead) %>
+			</font>
+			<hr>
+			<font size="2">
+				<%= simple_format(@news.copy) %>
+			</font>
+			<br>
+			<br>
+			<font size="1" style="float: right;">
+				<%= @news.created_at.strftime("%d-%m-%y %H:%M") %> - <i><%= @news.author.name + " " + @news.author.last_name %></i>
+			</font>
+			<hr style="height:2px;border:none;color:#333;background-color:#333;">
+			<font size="5">
+				Comentarios
+			</font>
 
-<p>
-  <strong>Subhead:</strong>
-  <%= @news.subhead %>
-</p>
+	</div>
+</div>
 
-<p>
-  <strong>Copy:</strong>
-  <%= @news.copy %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @news.date %>
-</p>
-
-<%= link_to 'Edit', edit_news_path(@news) %> |
-<%= link_to 'Back', news_index_path %>
+<%= link_to 'Back', news_index_path, class: "btn btn-primary col-xs-3" %>

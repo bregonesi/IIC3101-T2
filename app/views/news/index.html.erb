@@ -1,33 +1,40 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, 'News') %>
+
+<%= link_to 'New News', new_news_path, class: "btn btn-success", style: "float: right" %>
 
 <h1>News</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Headline</th>
-      <th>Subhead</th>
-      <th>Copy</th>
-      <th>Date</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @news.each do |news| %>
-      <tr>
-        <td><%= news.headline %></td>
-        <td><%= news.subhead %></td>
-        <td><%= news.copy %></td>
-        <td><%= news.date %></td>
-        <td><%= link_to 'Show', news %></td>
-        <td><%= link_to 'Edit', edit_news_path(news) %></td>
-        <td><%= link_to 'Destroy', news, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="row">
+  <% @news.each do |news| %>
+    <%= link_to(news, class: "news-link") do %>
+      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <% if user_signed_in? %>
+              <div class="row">
+                <div class="col-xs-12">
+                  <object><%= link_to "Edit", edit_news_path(news), class: "btn btn-primary col-xs-5" %></object>
+                  <object><%= link_to "Delete", news, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger col-xs-5 col-xs-offset-2" %></object>
+                </div>
+              </div>
+            <% end %>
+            <h4><%= truncate(news.headline, :length => 200) %></h4>
+          </div>
+          <div class="panel-body">
+            <%= simple_format(truncate(news.subhead, :length => 200)) %>
+            <hr>
+            <small><%= simple_format(truncate(news.copy, :length => 500)) %></small>
+          </div>
+          <div class="panel-footer container-fluid">
+            <div class="text-left" style="display: inline-block;">
+              <%= news.created_at.strftime("%d-%m-%y %H:%M") %>
+            </div>
+            <div class="text-right" style="display: inline-block; float: right;">
+              <span class="badge"><%= pluralize(news.ncom, "comentarios")%></span>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New News', new_news_path %>
+  <% end %>
+</div>

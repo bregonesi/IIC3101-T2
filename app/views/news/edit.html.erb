@@ -2,5 +2,6 @@
 
 <%= render 'form', news: @news %>
 
-<%= link_to 'Show', @news %> |
-<%= link_to 'Back', news_index_path %>
+<br>
+<%= link_to 'Back', @news, class: "btn btn-primary col-xs-3" %>
+<%= link_to 'Delete', @news, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger col-xs-3 col-xs-offset-6" %>

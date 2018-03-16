@@ -4,7 +4,7 @@ class NewsController < ApplicationController
   # GET /news
   # GET /news.json
   def index
-    @news = News.all
+    @news = News.all.order('created_at DESC')
   end
 
   # GET /news/1
@@ -14,7 +14,7 @@ class NewsController < ApplicationController
 
   # GET /news/new
   def new
-    @news = News.new
+    @news = current_user.news.build
   end
 
   # GET /news/1/edit
@@ -24,7 +24,8 @@ class NewsController < ApplicationController
   # POST /news
   # POST /news.json
   def create
-    @news = News.new(news_params)
+    @news = current_user.news.build(news_params)
+    print(current_user.news)
 
     respond_to do |format|
       if @news.save

@@ -7,7 +7,7 @@
     <%= devise_error_messages! %>
     <%= bootstrap_form_for(:user, :url => registration_path(:user), layout: :horizontal, html: { method: :put }) do |f| %>
       <%= f.text_field :name, autofocus: true, autocomplete: "fname" %>
-      <%= f.text_field :last_name, autofocus: true, autocomplete: "lname" %>
+      <%= f.text_field :last_name, autocomplete: "lname" %>
       <%= f.email_field :email, autocomplete: "email" %>
       <%= f.password_field :password, autocomplete: "off", placeholder: @minimum_password_length.to_s + " characters minimum" %>
       <%= f.password_field :password_confirmation, autocomplete: "off" %>
