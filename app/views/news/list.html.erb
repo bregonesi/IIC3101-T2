@@ -1,0 +1,39 @@
+<% provide(:title, "News") %>
+<h1>News</h1>
+
+<ul class="news">
+  <li class="h-title text-center" style="font-weight:bold">
+    <div style="width: 35%;">
+      Titulo
+    </div>
+    <div style="width: 20%;">
+      Autor
+    </div>
+    <div style="width: 20%;">
+      Fecha
+    </div>
+    <div style="width: 25%;">
+      Acciones
+    </div>
+  </li>
+  
+  <% @news.each do |news| %>
+    <%= link_to news do %>
+      <li class="h-title text-center">
+        <div style="width: 35%; margin-left: 10px;" class="text-left">
+          <%= news.short_headline 30 %>
+        </div>
+        <div style="width: 20%;">
+          <%= news.author.name + " " + news.author.last_name %>
+        </div>
+        <div style="width: 20%;">
+          <%= news.created_at.strftime("%d-%m-%y %H:%M") %>
+        </div>
+        <div style="width: 25%;">
+          <object><%= link_to "Edit", edit_news_path(news), class: "btn btn-primary" %></object>
+          <object><%= link_to "Delete", news, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %></object>
+        </div>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

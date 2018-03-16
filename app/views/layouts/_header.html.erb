@@ -17,7 +17,7 @@
                   <%= f.submit "Log in", class: "btn btn-primary btn-block" %>
                 <% end %>
               <% else %>
-                <%= link_to "News list", users_path %>
+                <%= link_to "News list", news_list_path %>
                 <div role="separator" class="divider"></div>
                 <%= link_to "Add user", new_user_registration_path %>
                 <%= link_to "Users list", users_path %>

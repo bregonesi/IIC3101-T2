@@ -1,10 +1,15 @@
 class NewsController < ApplicationController
   before_action :set_news, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+  before_action :authenticate_user!, only: [:list, :new, :edit, :create, :update, :destroy]
 
   # GET /news
   # GET /news.json
   def index
+    @news = News.all.order('created_at DESC')
+  end
+
+  # GET /news/list
+  def list
     @news = News.all.order('created_at DESC')
   end
 

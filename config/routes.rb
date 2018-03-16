@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   	delete '/users/:id', to: 'users#destroy', as: :delete_user
   end
 
+  get '/news/list', to: 'news#list'
   resources :news
 
 	root 'news#index'

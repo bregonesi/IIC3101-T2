@@ -5,3 +5,9 @@
 .news-link:hover {
 	color: inherit;
 }
+
+.h-title { // centra vertical y separa divs o lo que sea en espacios justificados
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
