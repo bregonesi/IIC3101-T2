@@ -1,0 +1,31 @@
+<font size="5">
+	<%= pluralize(@comments.count, "comentario") %>
+</font>
+
+<div class="row">
+	<ul id="comments" class="comments">
+	  <% if @comments.empty? %>
+	    <li>
+	      <h2>There are no comments for this new.</h2>
+	    </li>
+	  <% end %>
+
+	  <% @comments.each do |comment| %>
+	    <li>
+	      <div class="col-xs-2">
+	        <%= comment.author %>
+	        <br>
+	        <small><i><%= time_ago_in_words(comment.created_at) %> ago</i></small>
+	      </div>
+	      <div class="col-xs-10">
+	        <%= simple_format(raw comment.comment) %>
+	      </div>
+	    </li>
+	  <% end %>
+	</ul>
+</div>
+
+<hr>
+
+<h3>New Comment</h3>
+<%= render "new_comment" %>

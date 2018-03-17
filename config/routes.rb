@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   end
 
   get '/news/list', to: 'news#list'
-  resources :news
+  resources :news do
+  	resources :news_comments
+  end
 
 	root 'news#index'
 end

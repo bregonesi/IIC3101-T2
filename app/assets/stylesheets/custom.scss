@@ -135,3 +135,21 @@ footer ul li {
     background-color: $gray-lighter;
   }
 }
+
+.comments {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
+  }
+  li:last-child {
+    border-bottom: 0px;
+  }
+  a:hover {
+    text-decoration: none;
+    color: inherit;
+    background: none;
+  }
+}

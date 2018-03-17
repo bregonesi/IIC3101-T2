@@ -5,17 +5,18 @@ class NewsController < ApplicationController
   # GET /news
   # GET /news.json
   def index
-    @news = News.all.order('created_at DESC')
+    @news = News.all.order('created_at DESC').paginate(page: params[:page], :per_page => 10)
   end
 
   # GET /news/list
   def list
-    @news = News.all.order('created_at DESC')
+    @news = News.all.order('created_at DESC').paginate(page: params[:page], :per_page => 100)
   end
 
   # GET /news/1
   # GET /news/1.json
   def show
+    @comments = @news.comments.order('created_at ASC')
   end
 
   # GET /news/new
@@ -31,7 +32,6 @@ class NewsController < ApplicationController
   # POST /news.json
   def create
     @news = current_user.news.build(news_params)
-    print(current_user.news)
 
     respond_to do |format|
       if @news.save

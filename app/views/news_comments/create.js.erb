@@ -1,0 +1,14 @@
+$('#new_news_comment').bind('ajax:success', function() {
+	$(this).parent().parent().prev().fadeOut(600, function() {
+		$(this).parent().parent().prev().remove();
+	});
+  $(this).fadeOut(600, function() {
+  	$(this).parent().html('<font size="4">Comment successfully published.</font>');
+  });
+  $(this).parent().parent().prev().prev().prev().find("ul").find("h2").parent().remove();
+
+  $("#comments").append('<li><div class="col-xs-2"><%= @comment.author %><br><small><i><%= time_ago_in_words(@comment.created_at) %> ago</i></small></div><div class="h-title col-xs-10"><%= simple_format(raw @comment.comment) %></div></li>').hide().fadeIn(600, function() {
+		$(this).parent().prev().html('<%= pluralize(@comment.news.comments.count, "comentario") %>');
+	});
+});
+

@@ -28,10 +28,9 @@
 				<%= @news.created_at.strftime("%d-%m-%y %H:%M") %> - <i><%= @news.author.name + " " + @news.author.last_name %></i>
 			</font>
 			<hr style="height:2px;border:none;color:#333;background-color:#333;">
-			<font size="5">
-				Comentarios
-			</font>
 
+		  <%= render "show_comments" %>
+			<br>
 	</div>
 </div>
 

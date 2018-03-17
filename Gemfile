@@ -24,6 +24,10 @@ gem 'bootstrap-sass'
 gem 'bootstrap_form'
 # Jquery
 gem 'jquery-rails'
+# Paginate
+gem 'will_paginate-bootstrap'
+# Faker
+gem 'faker'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

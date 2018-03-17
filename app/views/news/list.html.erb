@@ -1,5 +1,12 @@
 <% provide(:title, "News") %>
+
+<%= link_to 'New News', new_news_path, class: "btn btn-success", style: "float: right" %>
+
 <h1>News</h1>
+
+<div class="text-right">
+  <%= will_paginate @news, renderer: BootstrapPagination::Rails %>
+</div>
 
 <ul class="news">
   <li class="h-title text-center" style="font-weight:bold">
@@ -37,3 +44,7 @@
     <% end %>
   <% end %>
 </ul>
+
+<div class="text-right">
+  <%= will_paginate @news, renderer: BootstrapPagination::Rails %>
+</div>
