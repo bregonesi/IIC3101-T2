@@ -4,20 +4,20 @@
 
 <h1>News</h1>
 
+<div class="text-right">
+  <%= will_paginate @news, renderer: BootstrapPagination::Rails %>
+</div>
 <div class="row">
-  <div class="text-right">
-    <%= will_paginate @news, renderer: BootstrapPagination::Rails %>
-  </div>
   <% @news.each do |news| %>
     <%= link_to(news, class: "news-link") do %>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+      <div class="col-xs-12">
         <div class="panel panel-info">
           <div class="panel-heading">
             <% if user_signed_in? %>
               <div class="row">
                 <div class="col-xs-12">
-                  <object><%= link_to "Edit", edit_news_path(news), class: "btn btn-primary col-xs-5" %></object>
-                  <object><%= link_to "Delete", news, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger col-xs-5 col-xs-offset-2" %></object>
+                  <object><%= link_to "Edit", edit_news_path(news), class: "btn btn-primary col-xs-3" %></object>
+                  <object><%= link_to "Delete", news, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger col-xs-3 col-xs-offset-6" %></object>
                 </div>
               </div>
             <% end %>
