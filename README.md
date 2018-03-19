@@ -1,24 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Heroku link: https://fast-citadel-63366.herokuapp.com
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Users:
+| name  | email | password |
+| ----- | ----- | -------- |
+| Benjamin Regonesi | baregonesi@uc.cl | 123456 |
+| Arturo Tagle | ajtagle@uc.cl | 123456 |
+| Felipe Rojos | farojos@uc.cl | 123456 |
