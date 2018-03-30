@@ -18,4 +18,13 @@ class News < ApplicationRecord
   	self.copy.truncate(len)
   end
 
+  def as_json(*args)
+    super.tap { |hash|
+      hash["title"] = hash.delete "headline"
+      hash["subtitle"] = hash.delete "subhead"
+      hash["body"] = hash.delete "copy"
+      hash["body"] = hash.delete "short_copy" if hash["short_copy"]
+    }
+  end
+  
 end
