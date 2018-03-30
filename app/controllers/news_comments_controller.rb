@@ -13,23 +13,41 @@ class NewsCommentsController < ApplicationController
     if @news.id == @comment.news_id
       render json: @comment.as_json(except: [:updated_at]), status: :ok
     else
-      render json: "", status: :error
+      render json: {"error": "comment id does not match with news id"}, status: :unprocessable_entity
     end
   end
 
+  # POST /news/:news_id/comments
   def create
     @comment = @news.comments.build(comment_params)
 
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to @news }
-        format.json
-        format.js   { render :layout => false }
+    if @comment.save
+      render json: @comment.as_json(except: [:updated_at]), status: :created
+    else
+      render json: @comment.errors, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH/PUT /news/:id
+  def update
+    if params["news_comment"]["id"] != @comment.id
+      render json: {"error": "comment id does not match with param id"}, status: :unprocessable_entity
+    else
+      if @comment.update(comment_params)
+        render json: @comment.as_json(except: [:updated_at]), status: :ok
       else
-        format.html { redirect_to @news }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-        format.js   { render :layout => false }
+        render json: @comment.errors, status: :unprocessable_entity
       end
+    end
+  end
+
+  # DELETE /news/:id
+  def destroy
+    success = @comment.as_json(except: [:updated_at])
+    if @comment.destroy
+      render json: success, status: :ok
+    else
+      render json: {"error": "comment already deleted"}, status: :unprocessable_entity
     end
   end
 

@@ -6,7 +6,7 @@ class News < ApplicationRecord
   # validates :author, presence: true
   validates :headline, presence: true
   validates_length_of :headline, :maximum => 200
-  validates :subhead, presence: true
+  #validates :subhead, presence: true
   validates_length_of :subhead, :maximum => 200
   validates :copy, presence: true
 

@@ -2,64 +2,43 @@ class NewsController < ApplicationController
   before_action :set_news, only: [:show, :edit, :update, :destroy]
 
   # GET /news
-  # GET /news.json
   def index
     @news = News.all.select(:id, :headline, :subhead, :copy, :created_at).order('created_at DESC')
     render json: @news.as_json(except: [:copy], methods: [:short_copy]), status: :ok
   end
 
-  # GET /news/1
-  # GET /news/1.json
+  # GET /news/:id
   def show
     render json: @news.as_json(except: [:updated_at]), status: :ok
   end
 
-  # GET /news/new
-  def new
-    @news = News.new
-  end
-
-  # GET /news/1/edit
-  def edit
-  end
-
   # POST /news
-  # POST /news.json
   def create
     @news = News.new(news_params)
 
-    respond_to do |format|
-      if @news.save
-        format.html { redirect_to @news, notice: 'News was successfully created.' }
-        format.json { render :show, status: :created, location: @news }
-      else
-        format.html { render :new }
-        format.json { render json: @news.errors, status: :unprocessable_entity }
-      end
+    if @news.save
+      render json: @news.as_json(except: [:updated_at]), status: :created
+    else
+      render json: @news.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /news/1
-  # PATCH/PUT /news/1.json
+  # PATCH/PUT /news/:id
   def update
-    respond_to do |format|
-      if @news.update(news_params)
-        format.html { redirect_to @news, notice: 'News was successfully updated.' }
-        format.json { render :show, status: :ok, location: @news }
-      else
-        format.html { render :edit }
-        format.json { render json: @news.errors, status: :unprocessable_entity }
-      end
+    if @news.update(news_params)
+      render json: @news.as_json(except: [:updated_at]), status: :ok
+    else
+      render json: @news.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /news/1
-  # DELETE /news/1.json
+  # DELETE /news/:id
   def destroy
-    @news.destroy
-    respond_to do |format|
-      format.html { redirect_to news_index_url, notice: 'News was successfully destroyed.' }
-      format.json { head :no_content }
+    success = @news.as_json(except: [:updated_at])
+    if @news.destroy
+      render json: success, status: :ok
+    else
+      render json: {"error": "news already deleted"}, status: :unprocessable_entity
     end
   end
 
@@ -71,6 +50,9 @@ class NewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def news_params
-      params.require(:news).permit(:headline, :subhead, :copy, :date)
+      params["news"]["headline"] = params["title"] if params["title"]
+      params["news"]["subhead"] = params["subtitle"] if params["subtitle"]
+      params["news"]["copy"] = params["body"] if params["body"]
+      params.require(:news).permit(:headline, :subhead, :copy)
     end
 end
