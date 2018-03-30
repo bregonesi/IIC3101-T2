@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20180316195850) do
 
   create_table "news", force: :cascade do |t|
     t.string "headline"
-    t.string "subhead"
+    t.string "subhead", default: ""
     t.text "copy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
