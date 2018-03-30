@@ -1,9 +1,9 @@
 class News < ApplicationRecord
-	belongs_to :author, foreign_key: "user_id", class_name: "User"
+	#belongs_to :author, foreign_key: "user_id", class_name: "User"
   has_many :comments, class_name: "NewsComment", dependent: :destroy
 
 	# Validates
-  validates :author, presence: true
+  # validates :author, presence: true
   validates :headline, presence: true
   validates_length_of :headline, :maximum => 200
   validates :subhead, presence: true

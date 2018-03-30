@@ -1,27 +1,22 @@
 class NewsController < ApplicationController
   before_action :set_news, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:list, :new, :edit, :create, :update, :destroy]
 
   # GET /news
   # GET /news.json
   def index
-    @news = News.all.order('created_at DESC').paginate(page: params[:page], :per_page => 10)
-  end
-
-  # GET /news/list
-  def list
-    @news = News.all.order('created_at DESC').paginate(page: params[:page], :per_page => 100)
+    @news = News.all.select(:id, :headline, :subhead, :copy, :created_at).order('created_at DESC')
+    render json: @news.as_json(except: [:copy], methods: [:short_copy]), status: :ok
   end
 
   # GET /news/1
   # GET /news/1.json
   def show
-    @comments = @news.comments.order('created_at ASC')
+    render json: @news.as_json(except: [:updated_at]), status: :ok
   end
 
   # GET /news/new
   def new
-    @news = current_user.news.build
+    @news = News.new
   end
 
   # GET /news/1/edit
@@ -31,7 +26,7 @@ class NewsController < ApplicationController
   # POST /news
   # POST /news.json
   def create
-    @news = current_user.news.build(news_params)
+    @news = News.new(news_params)
 
     respond_to do |format|
       if @news.save

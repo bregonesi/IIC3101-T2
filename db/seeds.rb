@@ -35,9 +35,10 @@ User.all.each do |user|
 		rand(1..6).times do |x|
 			copy << "\n\n" + Faker::Lorem.paragraph(3, true, 20)
 		end
-		user_id = user.id
+		#user_id = user.id
 		created_at = Faker::Time.between(user.created_at, Date.yesterday)
-		news = News.create({headline: headline, subhead: subhead, copy: copy, user_id: user_id, created_at: created_at})
+		#news = News.create({headline: headline, subhead: subhead, copy: copy, user_id: user_id, created_at: created_at})
+		news = News.create({headline: headline, subhead: subhead, copy: copy, created_at: created_at})
 
 		rand(0..15).times do |j|
 			author = Faker::Name.name

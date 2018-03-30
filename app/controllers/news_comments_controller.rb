@@ -1,5 +1,21 @@
 class NewsCommentsController < ApplicationController
+  before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :find_news
+
+  # GET /news/:news_id/comments
+  def index
+    @comments = @news.comments.select(:id, :author, :comment, :created_at).order('created_at ASC')
+    render json: @comments.as_json, status: :ok
+  end
+
+  # GET /news/:news_id/comments/:id
+  def show
+    if @news.id == @comment.news_id
+      render json: @comment.as_json(except: [:updated_at]), status: :ok
+    else
+      render json: "", status: :error
+    end
+  end
 
   def create
     @comment = @news.comments.build(comment_params)
@@ -25,4 +41,9 @@ class NewsCommentsController < ApplicationController
     def find_news
       @news = News.find(params[:news_id])
     end
+
+    def set_comment
+      @comment = NewsComment.find(params[:id])
+    end
+
 end
